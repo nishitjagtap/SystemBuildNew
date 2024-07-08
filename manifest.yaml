@@ -1,0 +1,36 @@
+common:
+  pipelineType: node
+  lint:
+    enabled: false
+  unitTest:
+    enabled: false
+  staticAnalysis:
+    enabled: false
+  buildAnalysis:
+    enabled: false
+  package:
+    enabled: false
+  publish:
+    enabled: false
+  deploy:
+    enabled: true
+    type: multi
+    stages:
+      set-vpcx-account:
+        enabled: true
+        type: iac
+        jenkinsUrl: 'https://iac-jenkins.cloudx.jnj.com/'
+        jobName: 'IaC'
+        jenkinsCredentialsId: 'sourcecode-bitbucket'
+        tfVersion: '1.0'
+        vpcxAccount: 'set-vpcx-account'
+        subDirectory: 'set-vpcx-account'
+  versionCalculation:
+    enabled: false
+  resolveArtifacts:
+    enabled: false
+
+environments:
+  DEV:
+  QA:
+  PROD:

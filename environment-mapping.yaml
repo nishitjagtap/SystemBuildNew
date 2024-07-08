@@ -1,0 +1,6 @@
+- branchNamePattern: '^(development|develop|dev|feature).*'
+  environment: 'DEV'
+- branchNamePattern: '^(staging|QA|qa|release).*'
+  environment: 'QA'
+- branchNamePattern: '^(prod|production).*'
+  environment: 'PROD'

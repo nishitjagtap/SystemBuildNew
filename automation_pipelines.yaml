@@ -1,0 +1,4 @@
+- service: eat-jenkins
+  environment: Production
+  teamKey: tabx
+  jenkinsType: release

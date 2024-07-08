@@ -1,0 +1,536 @@
+Received: from SN7PR19MB7501.namprd19.prod.outlook.com (2603:10b6:806:340::14)
+ by DM6PR19MB4090.namprd19.prod.outlook.com with HTTPS; Mon, 8 Jul 2024
+ 11:05:13 +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=dQvMmwTwKgzcQHmGfwqc16BkgvxT7mwMKdjafqzA9lgdgcGfXw8RJn1MfNSH2XXsOmcTxqA9Gb8eu/c2tA30AwlDzHkdH6wQUjg5g4m/ayIBa1WCsbmvP8BgTKdWJKRXJTjwckiS1L0V5PontfcROM1FnbGMp8geacZybLWJkxwnq//dluTA2KLk75d4i/MOl45WMyDWRdSPmH9gI51S7AAZpddx/6LwyBZYs7NXNBCBbfQCw/SQKaPpoCXBX1eC4yS2FuI37wEF+T8ua/sbHJiZdjaeq/40pOTrqz/AgrPO4AtCeZII2fEBI24zUwvGZZ0vqCehUPb/03MnYV0jgg==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3ZZCC+qDQYVK9SFU/Hdw5heS46RGocKnBACWPd+vGWU=;
+ b=BYuYw2cDKfDgLFCP0x0vJepLC1NOvd2AtP4NPSZn83nAnRDtO0yCIzSmmynBsjj6XafY/TTMtWH6ML5YkRGqLMygHOk9L5rO6RRz2hX7ufX0FqbDRBMHPDKU3OdDNq05e012eTrOARxFOLlBhz7Hu9PMHgsSw7uc2NqvHmF4kUJJR36kO/sPblxRxbE2bErOwu7Agx4sFcfnzu7ktsWzH7cogKoLQ4wAhwK//GUxbr5HXUB1IMOhZSulcAjqwQSNv/+r79L2T9576/FCrBzWu+4UfTYJAFJKzaT7RWHSSHIwqyWAuxMbdea10isTQ7lLNn+tfr2ntuBocSqAiCf4mg==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.71.153.36) smtp.rcpttodomain=quantumintegrators.com
+ smtp.mailfrom=its.jnj.com; dmarc=pass (p=quarantine sp=reject pct=100)
+ action=none header.from=its.jnj.com; dkim=pass (signature was verified)
+ header.d=jnj.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=its.jnj.com] dkim=[1,1,header.d=its.jnj.com]
+ dmarc=[1,1,header.from=its.jnj.com])
+Received: from BY5PR16CA0015.namprd16.prod.outlook.com (2603:10b6:a03:1a0::28)
+ by SN7PR19MB7501.namprd19.prod.outlook.com (2603:10b6:806:340::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.35; Mon, 8 Jul
+ 2024 11:05:11 +0000
+Received: from SJ5PEPF000001EA.namprd05.prod.outlook.com
+ (2603:10b6:a03:1a0:cafe::a5) by BY5PR16CA0015.outlook.office365.com
+ (2603:10b6:a03:1a0::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.35 via Frontend
+ Transport; Mon, 8 Jul 2024 11:05:11 +0000
+Authentication-Results: spf=pass (sender IP is 216.71.153.36)
+ smtp.mailfrom=its.jnj.com; dkim=pass (signature was verified)
+ header.d=jnj.com;dmarc=pass action=none header.from=ITS.JNJ.com;compauth=pass
+ reason=100
+Received-SPF: Pass (protection.outlook.com: domain of its.jnj.com designates
+ 216.71.153.36 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.71.153.36; helo=esa3.jnj-out.iphmx.com; pr=E
+Received: from esa3.jnj-out.iphmx.com (216.71.153.36) by
+ SJ5PEPF000001EA.mail.protection.outlook.com (10.167.242.198) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7762.17 via Frontend Transport; Mon, 8 Jul 2024 11:05:11 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=jnj.com; i=@jnj.com; q=dns/txt; s=1024jnj;
+  t=1720436711; x=1751972711;
+  h=from:to:subject:date:message-id:references:in-reply-to:
+   mime-version;
+  bh=3ZZCC+qDQYVK9SFU/Hdw5heS46RGocKnBACWPd+vGWU=;
+  b=jJ4/3m2b6RZv4bRCx+TTuMC0kLmzH+8UnhHno0pAQD7rCrIMJSa2YM7k
+   biZt2LV3YwuzWfm5Kj9l6ogtmEAzNGzQ/XExmoOWSqSEO814qf0Orpa5c
+   Kkw/q4H6QZV+7AseLp5uja86oSSEKvjKKlUx6LKEJ9bUuA4QIHEqNE1pI
+   8=;
+X-IronPort-CES: True
+X-CES-SBRS: 5.2
+X-CES-HAT: $RELAYED EOP_Out
+X-CES-ACC: 1
+X-IronPort-AV: E=McAfee;i="6700,10204,11126"; a="135070268"
+X-IronPort-AV: E=Sophos;i="6.09,191,1716264000"; 
+   d="yaml'?scan'208,217";a="135070268"
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-CES-NonIMG: True
+X-ConFLTR: C-OU-Accepted_Domains_NHE
+X-CES-AD-NHE: Accepted
+X-Attch: $filename
+X-CES3-OU: SI
+IronPort-Data: A9a23:xGLcH67t8cufHRMkYGETdgxRtG3AchMFZxGqfqrLsTDasI4TYwOz/
+ BJFDDfdY6HJfCukJoVG3L7G/U8Cu8LQztFrTVNpriBgHylEp8aUW4jBch6gMXvIJcDKQEg/t
+ cwQNoXMcZg4HnPQrRz0buGx9yMgj6zSTeCnBoYoVswJqSpMEU/N3jozx79RbvdUqdilHxuW6
+ 5S1ocDZO16jwHh5O35S6aSB7hhoubPusTkI+0YzYf1Cp1K2q5VuN7ofIKy9R0YUOKEJWLXSe
+ tv+8V2Zwo/410YkUor9ybqgK0MEGrKPNFOD1yQLUPn/jkUc+iZog/o3aKNMOExatW6Ezot7o
+ DlvWT1cauuL0onkwrl1v8xwSXkW0YtupuCfeRBTluTKlhScLRMA+903UAdte9Veor0taY133
+ aRwACgXaRyejP6Bzru+S+197uwuN8CuN44E0p1a5Wix4c0OH9abEs0m2fcChG1s3p8WTa6ED
+ yYkQWIHgCroMkUn1mg/VcpWcNeA3hHXbzBeoVSJkqs7i0C7INtZi+CF3HL9I7RmdO0N9qqqj
+ juuE1fRW3n2AOeiJQ+tqRpAsANucRTTA+r+HJXgnhJjbcb6KmY7UHX6XnPjyRW1ohLlAYoHQ
+ 6C9F+VHQaUarSSWotfBsxKQm0ao5DwsffVpH84K+V2o4auXxALIGT1RJtJBQIROWM4ebxhy7
+ mXRwvjUXWQx9rqIVXia67GY6yuoPjQYJnMDYilCShYZ597ko8c4iRenotRLTPbz34azRXevq
+ 9yJhHFWa7E7pvUL3r++pwvvgi634JrPTEg+4QC/smeNt1gkPNH9PdL4gbTdxdlfEoChFlqEh
+ 3wjndiF7+0sNq2onRXYFY3hG5nyvKzZb1Uwm2VHFJks6z2rvWWjdJpV6RlnOU5vLtsBeDn1b
+ UDJsB9W/oQVN3yvBZKbeKq0AsUuiKXpDsj4TfnGasIXPcAoLVffo2dpeFKa2H3rnA40i6YjN
+ JyHcMGqS3EHFaBgyznwTOAYuVM2+swg7VjracrZ/zKI6La9VG/JbJwEc3yKP/9suctovz7pH
+ 8Zj29qikkoFCLagOnaPqeYuwUY2wW/X7K0aSvC7lcbaeGKK4El7V5fsLUoJIuSJZZh9mObS5
+ W2aUURF0lf5jnCvAVzVMyEzNO+3BMwm8ilT0ckQ0bCAiyhLjWGHvPZ3SnfLVeR5pbcLIQNcE
+ 6dYJ5raWqwnpsrvpGpGM8CsxGCdSPhbrVnVZXb6CNTOV5thTBbO4djqYkPk8zMWZhdbRuNvy
+ 4BMIjjzGMJZLyw7VZ6+QKv2nzuZ4yJB8MosBBGgCocIJy3RHH1CdnaZYgkfeZ9ccH0uB1Kyi
+ m6rPPvvjbCX+NBqrYmU2vrsQkXAO7IWI3e21lLztd6eXRQ2NEL5qWOceI5kpQzgaV4=
+IronPort-HdrOrdr: A9a23:7Xo3fK+XtzmanZZYqmFuk+HUdr1zdoMgy1knxilNoENuH/Bwxv
+ rFoB1E73TJYW4qKQgdcKO7SdG9qBLnhNdICOYqTNKftWXd1ldAabsSi7cKoAeQUxEWlNQtsZ
+ uIGpIWYLGeMbE5t7ec3ODSKbYdKay8gcKVbJDlvhRQpG9RCp1I3kNcMEK2A0d2TA5JCd4QE4
+ ed3NNOo36NaGkadcOyA1gCRqzmq8fQnJzrTBYaD1p/gTP+xw+A2frfKVy1zx0eWzRAzfML9n
+ XEqRXw4uGOouy20RjV0k7U9tBzlMH6wtVOKcSQgow+KynqiCyveIN9Mofy9wwdkaWK0hIHgd
+ PMqxAvM4BY8HXKZFy4phPrxk3JzCsuw2WK8y7VvVLT5ejCAB4qActIgoxUNjHD7VA7gd162K
+ VXm0qEqptsCw/aliiV3amGa/gqrDv7nZMRq59Ss5Vta/pcVFaXl/1cwKphKuZAIMs90vFjLA
+ AhNrCZ2B8cSyLgU5mQhBgU/DXrZAV/Iv7OeDl+huWFlzRRhTRjyVcEyIgYgmoK8o47RvB/lp
+ X5G7Utm7dUQsAMa6VhQO8HXMusE2TIBQnBKWSIPD3cZdU60l/22uzKCY8OlZSXUY1NyIF3lI
+ XKUVteu2J3c0XyCdeW1JkO9hzWWm2yUTnk18kbvvFCy8vBbauuNTfGREElksOmrflaCsrHW+
+ yrMJYTB/P4N2PhFYtAwgW7UZhPLnsVVtETp78AKiWzi9OOLpevuv3Qcf7VKraoGTE4WnnnCn
+ 9GRzT3LNUo1DHZZpY5ummgZ5rAQD2AwXsrKtmnwwE68vlzCrFx
+X-Talos-CUID: 9a23:z2lu2GD7eB22TPf6ExJf2BQ2KuYKS3H+/GaMBmS5SkFtGaLAHA==
+X-Talos-MUID: 9a23:tUaoWQQaOs/MGyGvRXTDmw9kDJ9r5p+qL0YdipYLmfK4ECVJbmI=
+Received: from mail-eastusazlp17011007.outbound.protection.outlook.com (HELO BL0PR05CU006.outbound.protection.outlook.com) ([40.93.4.7])
+  by esa3.jnj-out.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jul 2024 07:05:09 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CfAncAdWIyEFXucYGR4hLWds0PzaCBFjRtHmTrqfBiZuYU9buRRbhUMotVfC1mBcOhkjrmD3yeINQy20mN1CHMCLpR+3cY3nN0Zkeiyp5e5FK27f5AO+UUeOq5BEcvTFUeWcRkwyKAJ6tvV1WmOs208IpuHbPeGY97q6xmAHXWRhh9J3KLOTeXsYNlxFhoCisGfTThQivzf6jPaqsEdm0o+4DLJJ8ZNYRRQO5OudLEtAJ5LSu7JChVCibGXQxrWE4s3eO8fH3e7AW/Q5WbJs5nbVoP2ZGo7bAQZdDsbUH/592AcPJQFz11uBRiuv/wLqOEfATDOMnLwRlujS95LTAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=3ZZCC+qDQYVK9SFU/Hdw5heS46RGocKnBACWPd+vGWU=;
+ b=LS1U6j6Al4Ouk5Mkf3XTvShae46hKS3XH4YlQCHxqMxZPYvHoZ+5m4FbRPxjGDyQQNQafRWzGsaK+MIazIzNjRbA/fWn8GwXvtKZtV25oi4os303CA9ywjVA2JbsTvFTK9NpiXBmZdsyI76zQBzdSXrqvvY1QrKkjumP4WHmQJHMcYIzkNa8No9E1Sg8CMG2DMuYOAGpjVdbNbT2FyaOFTFFyclwutXNWIMEJ3IA/f3jrXojTKCb4E9dKT5PxExOhR05KMidr6PiF3dFM73uepquiMjog5IRMZnICoKQqGFUlKmhsAwKHBCPuTj7MmR3dM0jzkJU8nlxYmV6nmgNtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=its.jnj.com; dmarc=pass action=none header.from=its.jnj.com;
+ dkim=pass header.d=its.jnj.com; arc=none
+Received: from BY5PR07MB7250.namprd07.prod.outlook.com (2603:10b6:a03:20b::21)
+ by SJ0PR07MB7790.namprd07.prod.outlook.com (2603:10b6:a03:28d::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7741.35; Mon, 8 Jul
+ 2024 11:05:06 +0000
+Received: from BY5PR07MB7250.namprd07.prod.outlook.com
+ ([fe80::bbbb:1087:b25b:2440]) by BY5PR07MB7250.namprd07.prod.outlook.com
+ ([fe80::bbbb:1087:b25b:2440%3]) with mapi id 15.20.7741.033; Mon, 8 Jul 2024
+ 11:05:06 +0000
+From: "Sharma, Chetan [GTSUS NON-J&J]" <CSharm23@ITS.JNJ.com>
+To: "chetan.sharma@quantumintegrators.com"
+	<chetan.sharma@quantumintegrators.com>
+Subject: FW: scm_jenkins
+Thread-Topic: scm_jenkins
+Thread-Index: AQHa0SZXIPXUD2cSrU6E7Trje836YLHsqwlw
+Date: Mon, 8 Jul 2024 11:05:06 +0000
+Message-ID:
+ <BY5PR07MB72504628DC887A9B7CF501689CDA2@BY5PR07MB7250.namprd07.prod.outlook.com>
+References:
+ <BY5PR07MB7250328EC76534370EB785879CDA2@BY5PR07MB7250.namprd07.prod.outlook.com>
+ <BY5PR07MB7250B29A999787A1645CCFA59CDA2@BY5PR07MB7250.namprd07.prod.outlook.com>
+In-Reply-To:
+ <BY5PR07MB7250B29A999787A1645CCFA59CDA2@BY5PR07MB7250.namprd07.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=ITS.JNJ.com;
+x-ms-traffictypediagnostic:
+ BY5PR07MB7250:EE_|SJ0PR07MB7790:EE_|SJ5PEPF000001EA:EE_|SN7PR19MB7501:EE_|DM6PR19MB4090:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94b182e5-4f82-4721-1842-08dc9f3dd618
+x-eop-route-outbound: Si
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted:
+ BCL:0;ARA:13230040|376014|1800799024|366016|38070700018;
+X-Microsoft-Antispam-Message-Info-Original:
+ =?us-ascii?Q?FhPaLTkEG1us+9KU8iDcmiInmD+Blogn0P6rG9BL49e+TdZfO+bsJoNu8Etm?=
+ =?us-ascii?Q?QLU7z4e5BvBmC8I2+MhZ4y6o4Po+cPdelHSKuAdc010pqyO25oFbdGsOdKiT?=
+ =?us-ascii?Q?AZC/h9eV2Is3tV57qfWFg+YhAOJkIAw9YldJKIAXdvAmEojxegVAl55lYDYd?=
+ =?us-ascii?Q?c9cCEq9uQpR9aqVkn00a82NAKXaXvOKSKJ2OtMPMHsB1NnJK4zi2Afga5eMX?=
+ =?us-ascii?Q?ndGTS43Wlt6sbmbJl1vqakZTxrAX8rdeBe+0ZN03QCaIJi29ikfEmK8WyYfe?=
+ =?us-ascii?Q?3EkblWG4wUnBZvWCBRsFX2USU9mLJ4rLP+LFS1x64ZE/cxkxK4n6EsFn5VBN?=
+ =?us-ascii?Q?jld6yWNCOLi3vbKr+AdZjpcDNMyvjAh/clTpLjyqBgQxSzRcoCmi4TpPdare?=
+ =?us-ascii?Q?gBBSYd2pJ/gw5BclFZxLSk09jOEbCth7ulF5JhP1q6hxPXZQUaHMUGQebeVa?=
+ =?us-ascii?Q?lNH3bFO1NLeXd2XNJgDpCwUyA30jHhs8r8p/WOU6eZEZBlfETOrT+DAzyihA?=
+ =?us-ascii?Q?h7Qvklm30tuPiFzAJIqgSTF2LG+7Ea4hQASnwWOPrMrftWoKIk8HkzLDp6C4?=
+ =?us-ascii?Q?iuF0jhI6+99lR/pl+hJlZ0dI69euDQGrBY7InKBmTboyteGN3l0pbACvVCmJ?=
+ =?us-ascii?Q?W2DGkDhN0IWJ/3YCQ9SpTVD89aaTl7Pp4b3DNn+De6Q1uvtIY4GSA5BF9UMT?=
+ =?us-ascii?Q?o8wiQ5wSZUPtqAzbBg5Grrpz9XkL3bvSxk7m5shtt8s7x0r9vBYoCzEbGdSU?=
+ =?us-ascii?Q?khB0zeT6Y6EdPbUvgDtM9R+Wt3vrtJJsM4/eg74rW7FTlUp1JVhN71PiRGFg?=
+ =?us-ascii?Q?UidN14NjEpBA4372jb5FgEyNADW+szXwg54HHikgXyGjoWJZwaeVV/w+G4/z?=
+ =?us-ascii?Q?1dMYTB2KpO0sE5AO9xDYI49dzgVEFrjmbRDOPBZsYiPCupYMnXbjgj6dSrdd?=
+ =?us-ascii?Q?jPGcy/zkj9+lAEr+CnyfgxePY/lrKIfN/IxDDJvGpPv46ylpshSocxEn8bD4?=
+ =?us-ascii?Q?bs+e0e0OqzUCXQjswv6iInYdWkRporoMSPkjSHmIwA7cvuPR24qCw7CRiGH/?=
+ =?us-ascii?Q?+6r6WdUzJSHIzmGYOfhz2ldOtRRrhvD9tm704K2bzvkQW35ikBmHAGCG0XU+?=
+ =?us-ascii?Q?oHZqFmDgj13jmTFkdCRi15Dr/zaS96ZwxYhVxKyqtnTlEqw6UFC1Oq36cRMk?=
+ =?us-ascii?Q?5vuAwGX270TbApX/IvtnGAooG1H9HNZO/R6l6hqvchvKf2/O9x27UzK0BShd?=
+ =?us-ascii?Q?yzJzteRcrP6ZF0pOx985hQSXCKRMG8TPCI062BDFHbFxzxPM17tgrKSIxHPB?=
+ =?us-ascii?Q?Q74UeikviioeT9RFNyqDIDodLgMYhrlcJUIm3sSyVKxOyv628vfv75jISapQ?=
+ =?us-ascii?Q?0QwscZNTsCOpYrWLtBhhj6qYtKdCuD8QqeS+NDgTxI+oTC60gA=3D=3D?=
+X-Forefront-Antispam-Report-Untrusted:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR07MB7250.namprd07.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(38070700018);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-Original-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-Original-0:
+ =?us-ascii?Q?Xd8ZuO39dq8mn7ZUUj2WO8yuos/+IIsWTX4YIwSBf8XBODyQ6L9huw7f1anE?=
+ =?us-ascii?Q?na9tk6EN22/9MPKtGEDoMkxUshzVudzr3EmS7pget3cpM1CqEl7v1fTTJznq?=
+ =?us-ascii?Q?G4PrGozgsr3mMMZEVW/xGu0K9osO5Yikp2RA56VUsCuuMD6Ky8z6UgBwYihA?=
+ =?us-ascii?Q?pDQNLnUWnORIH8/gYuJCUvhAISt3hznzMM3VRJyo/s9JujhU9GV1jJwjlLSR?=
+ =?us-ascii?Q?y438qgOZfEPuflffqKRkYFiCx5FQho49MJbqHmtW7OMmGG6LXsaUb6r2q6wk?=
+ =?us-ascii?Q?koy4r5codh6z7vu7tB37qFJKBcOrw9Td9c7HBvP3vPGMnxU8Rh20BMTEd/d/?=
+ =?us-ascii?Q?KpwNpo0dCc8T/OIi+Ti12unBeCs5IefgFqWQP61iY1qXT4giHf+FsYN7fQHa?=
+ =?us-ascii?Q?EViDdMLEyMnk3dy+NL48PYcUbSAKE7Kni2ZzxY5qa/1NrJJQjtkbjI/2Xi3R?=
+ =?us-ascii?Q?Ypx2jFNUbcGXIe7KgWK9ftwUHwCEjDQD9MAv9nZSxACS2vOZNttyFB+gN+ag?=
+ =?us-ascii?Q?cxrzx99Ww44KvjoNzaPAgfyAOn7QKZGIsvTq1o4H7sPtepXKMWz4ukRHWTIL?=
+ =?us-ascii?Q?4AeI+xonRynO7d/5E4GvGasq9yDdH0Igsy65I3r3/sSErWQF4OUXL1CO4gMV?=
+ =?us-ascii?Q?oLh0wWxrfH1lMCzPumSfAU5SBWuO0q9YaBZk2j/PzC4jIisPvzkXaOhdwNMf?=
+ =?us-ascii?Q?J6Hnx/W+oopaUgBxAF8R3Ykcv2wZ677zx/6YTiijy9JY8unHtXpsKi2+p5Nr?=
+ =?us-ascii?Q?FGSNAEBvFjkxFSxa8BpE5tfyPpZHsKSD+uQRrkIwxwxeM0VVQLl5tvAaJ1i9?=
+ =?us-ascii?Q?+bgA13nd5COmzeNIJgeF1WZxulmmW+SnYBbm43Eq9X0cl3Tk8BWsn7EOA9ge?=
+ =?us-ascii?Q?5c7wY1l4YET3AO0lFrGfpnT6KXaIR+5QVWK71/4LiLJb/HyldrnJklrr7vmH?=
+ =?us-ascii?Q?ErUKp/NigfWHzFa8LLT/v8ryVea+nXqhkd1G5Ke4tVFQ0MoEMahv/lGdG1Jf?=
+ =?us-ascii?Q?qvgYBVgFzQNsXKQjrTyjZo1X/X0CsMYEe2KwgzfwsxY1s+QsFoOC9v6HTyab?=
+ =?us-ascii?Q?5W4aWuasz/fEtBa1KQKHMB58G7gP0BnxWTsBE+kSGAb3WLng/72BodBNtAuz?=
+ =?us-ascii?Q?we9/AC4WVNhg8fJ2oN8vLiH4iOO85NfCSfRkM0pUDYm05W7e2qklI/I1pnGJ?=
+ =?us-ascii?Q?qWeAYJmUkVMi5H2wbqwGI+FOAZrBJ8zOYQ9XdinY6RTL1fBMkk7uqdZAfYs9?=
+ =?us-ascii?Q?cjl2t8DhLVLD81ycgjAEpKxGpF+fVKrCmBOogvJKrQr9k5bOPc47jrjHr0hK?=
+ =?us-ascii?Q?dywdpDKIFprK4aE3eS2+V2vYmuYBoYFtf+Ye8rlSiGqPcsdzJihy2QeEdXRp?=
+ =?us-ascii?Q?4yE2x6035zNk4kNjGzWRoVMlHjq6ZjdDVxVhvBgY2cPvzBlY1EloNcv9RC92?=
+ =?us-ascii?Q?Pm+HerDkhOiLNz+JlAz6/BVZc7drFiR34Oab9ARybmcTlVLT0T2a8eM9v70D?=
+ =?us-ascii?Q?/z3wNLePJbSizkIF0zFGRkWO/lTUqoolPYqOsXTvR1qByZ4zAP+PN7QhYMFR?=
+ =?us-ascii?Q?fNslTecFqWgKdWw5I4lmRUHUeh6AGqmgtp/yIBfQ?=
+Content-Type: multipart/mixed;
+	boundary="_004_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR07MB7790
+Return-Path: CSharm23@its.jnj.com
+X-MS-Exchange-Organization-ExpirationStartTime: 08 Jul 2024 11:05:11.3492
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id:
+ 94b182e5-4f82-4721-1842-08dc9f3dd618
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 125c265e-b1f0-494d-a8a1-bbce16d90b90:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped:
+ SJ5PEPF000001EA.namprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource:
+ SJ5PEPF000001EA.namprd05.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs:
+ 50a1c0ef-973e-4f70-fe48-08dc9f3dd30d
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:0;ARA:13230040|35042699022;
+X-Forefront-Antispam-Report:
+ CIP:216.71.153.36;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:esa3.jnj-out.iphmx.com;PTR:esa3.jnj-out.iphmx.com;CAT:NONE;SFS:(13230040)(35042699022);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Jul 2024 11:05:11.0992
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94b182e5-4f82-4721-1842-08dc9f3dd618
+X-MS-Exchange-CrossTenant-Id: 125c265e-b1f0-494d-a8a1-bbce16d90b90
+X-MS-Exchange-CrossTenant-AuthSource:
+ SJ5PEPF000001EA.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR19MB7501
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:02.3357496
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.7741.016
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910001)(944506478)(944626604)(920097)(930097)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?us-ascii?Q?a/qeElqxbRbZJKPPRpzjNZPp7llEiQdr4CPjYGsZ8gt/HsRzDBYlvDhc31/r?=
+ =?us-ascii?Q?rafxT1bTIGaJ2+dT8J/GjJRT4J108PkZEiNBdRyImF37K/7BIvnJELoEdLpf?=
+ =?us-ascii?Q?g7yxl2giMbnmt8b3ADpK3qfsSi6NDU0Bf31wQ4jaQl78lGXeRhmdCP0lmEtd?=
+ =?us-ascii?Q?jETzgP1ikfiNHQ84CGFAHvcRBEM2TtzFNlRnpdMSpJJJM+6K/YWnKwvOdX8/?=
+ =?us-ascii?Q?+mUWWTsXhd7lMHrqqlFPWEIpwrBfTWRyvuzt2J26u754dlry2gYC+jpKVArn?=
+ =?us-ascii?Q?wSleUzSTOdmWoxPgJd6AQAC/lqmrjYvldP4zkrjUUFPIutbQDjHX7zrcx1mo?=
+ =?us-ascii?Q?ur5T5PqDV9a/Gf87V7N+wviGolXuqRt3UU+bKROWYwMzmPLcDDm69pfT/nBe?=
+ =?us-ascii?Q?jZ47Ul29MFqvbIcdDb/Xt95QbSRiDlQz4QwW1mQCRV8yKjEHcJRYiaEhbggG?=
+ =?us-ascii?Q?ZERe8nJsvodhugsN5HIJGnaVJ34LOXqXdq+MCyMpl08TMmMh8RxCaIQBZxmN?=
+ =?us-ascii?Q?A8m4HmIIgeDzaT8mAQDl2N/YV6GWwWtwFsyKi/bDp1it0S4WvJjRGlAxv0Xc?=
+ =?us-ascii?Q?lPTsyRfB4PIBzf/R3/0ziNuoWJkih4oaVd0NEKulTosbcNAdZWhQGYoKPmbQ?=
+ =?us-ascii?Q?9uJ1EMtEcrcYpwKwrNNEvhOwYSZl6nkp837+fmKJMXWaKGQ1PEehDYl+hfPm?=
+ =?us-ascii?Q?DIeIL7lYRcfOqMrup7wmahZ9K1Y9VqptGws168grs1wt+DtI+9yS0o+qq8nW?=
+ =?us-ascii?Q?0D0zPodHOW4v62O6UmD1eYR/5DneUQW+W6c0uqaW86xgWgSHr/0gv6puswji?=
+ =?us-ascii?Q?T704QDtkFhMpJq3PX30brS9BSi5grPpZE2vCqTBsc+Spu3VxOHbRXveNWiCV?=
+ =?us-ascii?Q?E5xUZ39MYIn/PETtnN60kVPPwB2IHLPlKm2ZCMG+h17Y2g1KwQbRziQdCTde?=
+ =?us-ascii?Q?GsRKcHHGxMv71DTIVJ6qIQgllAUQSKczN8kZoAZtAm/8qLIxyEfAyNizmP0p?=
+ =?us-ascii?Q?j2uRvVXPUrKnhHnducb/05atpP+LwP3KNRU5J6dvNVsMgVDHjEX6BpCSsgA3?=
+ =?us-ascii?Q?XThyGNzFElYSzs91I5JB57f55bO5f0/2nuaKRFnQujUUhTJPWJMfC4ypEpGI?=
+ =?us-ascii?Q?QoSY7ZZBsv/X4iToXMA7RB18YTnbkWHue7hyzvn9ahKRZoVslYmDQjGL0EbM?=
+ =?us-ascii?Q?Kdg+G7UiSFVv+qOg/UKsIw39BCD17saVe/C3kyjNNicOHpnrwv3vQRNFhJRi?=
+ =?us-ascii?Q?u7hOR0xDIfGXBB+Xt/69hsw8Got9dT2MzH+NR2+A5xcOBivCzsi1X2+aZPiF?=
+ =?us-ascii?Q?V/aZPPOn/Tdufk43H1Ou3urZ9PhL3Mm0uyjap8HZKk6PFy5/iY3qQ2uYc2vE?=
+ =?us-ascii?Q?M91KtC8Y19oWeBTN3Y/v/4cv3OhJusiJz77OjHV5l/HFE5KC8qjVNSvRUC+i?=
+ =?us-ascii?Q?lXobJZYCN4W4GoaoQX4KW5+uBsN0LRrBdVEamINKiYg4/mMSuFKi3lm+J+oN?=
+ =?us-ascii?Q?MyPEB83ceXgROPUg52FB3uAhNxb509AqsQa/BP1xA6qZRgX+703GHN1aNr5I?=
+ =?us-ascii?Q?MyX8lShEVccHpus76o0TuNPnxOcxzLRwwwS8r6wn5LxVf4J1CkT6f/176wPZ?=
+ =?us-ascii?Q?duzBnfA1orJ+6nqb0xFxF9RecpTmw9PAdfiCcpVkMOKnHLWiFThkqnwo2j7F?=
+ =?us-ascii?Q?Ruyom4E+hpTDNgHM2dLegOiIMpGQDMHWS9c0ce5e9iWdFChBpghetILxZI3b?=
+ =?us-ascii?Q?nJKHCYZ/HjdKO/uSWtlZumkk5EorovZ5pmVej0Hr9YsChn76/g77Kj+jx1G7?=
+ =?us-ascii?Q?SyXYHjwPYWclf4x9PiUjp6W1ZlJ54qBT+u2Wyuu/1BhriK800ELI4WzG1ClP?=
+ =?us-ascii?Q?BMPb3FZyTn+PznKl7Sp3zn7NkyIHqYxejH4GVSJQzrLcM4HH+xg3XibEQe8j?=
+ =?us-ascii?Q?ERMzlavvgsXfeqkvU45BNc13JS6Ui0HmQMKGsOR8oZvOrFu6SIB1J+1XkYPE?=
+ =?us-ascii?Q?tgE+dRzUCiyT+7C7ZuaSxgpGaywTn87/NwBi7wENGcCYyBouNY1P09CK5Qrr?=
+ =?us-ascii?Q?SMfNlGFwimWfybgCYQmWo5GEmsfZS0pOjWFZXZDUqmnI7tJuxLlDF/VRaqfY?=
+ =?us-ascii?Q?ZLUKM2ivIlM5r1RQR9X3hmBzMT7So6R007uVf4ANhHd/363U1B4jfAM=3D?=
+MIME-Version: 1.0
+
+--_004_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_
+Content-Type: multipart/alternative;
+	boundary="_000_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_"
+
+--_000_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+
+
+Thanks & Regards,
+Chetan Sharma
+Automation | J&J Migration Team
+Quantum Integrators,  India
+* csharm23@its.jnj.com<mailto:csharm23@its.jnj.com>
+* +91 8534985983
+
+From: Sharma, Chetan [GTSUS NON-J&J] <CSharm23@ITS.JNJ.com>
+Sent: Monday, July 8, 2024 7:03 AM
+To: Sharma, Chetan [GTSUS NON-J&J] <CSharm23@ITS.JNJ.com>
+Subject: scm_jenkins
+
+
+
+Thanks & Regards,
+Chetan Sharma
+Automation | J&J Migration Team
+Quantum Integrators,  India
+* csharm23@its.jnj.com<mailto:csharm23@its.jnj.com>
+* +91 8534985983
+
+From: Sharma, Chetan [GTSUS NON-J&J]
+Sent: Monday, July 8, 2024 6:59 AM
+To: chetan.sharma@quantumintegrators.com<mailto:chetan.sharma@quantumintegr=
+ators.com>
+Subject: SAP Template
+
+
+
+Thanks & Regards,
+Chetan Sharma
+Automation | J&J Migration Team
+Quantum Integrators,  India
+* csharm23@its.jnj.com<mailto:csharm23@its.jnj.com>
+* +91 8534985983
+
+
+--_000_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_
+Content-Type: text/html; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" xmlns:w=3D"urn:schemas-microsoft-com:office:word" =
+xmlns:m=3D"http://schemas.microsoft.com/office/2004/12/omml" xmlns=3D"http:=
+//www.w3.org/TR/REC-html40"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dus-ascii"=
+>
+<meta name=3D"Generator" content=3D"Microsoft Word 15 (filtered medium)">
+<style><!--
+/* Font Definitions */
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;}
+@font-face
+	{font-family:"Cambria Math";
+	panose-1:2 4 5 3 5 4 6 3 2 4;}
+@font-face
+	{font-family:Calibri;
+	panose-1:2 15 5 2 2 2 4 3 2 4;}
+@font-face
+	{font-family:Aptos;}
+/* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{margin:0in;
+	font-size:11.0pt;
+	font-family:"Aptos",sans-serif;
+	mso-ligatures:standardcontextual;}
+a:link, span.MsoHyperlink
+	{mso-style-priority:99;
+	color:#467886;
+	text-decoration:underline;}
+span.EmailStyle20
+	{mso-style-type:personal-reply;
+	font-family:"Aptos",sans-serif;
+	color:windowtext;}
+.MsoChpDefault
+	{mso-style-type:export-only;
+	font-size:10.0pt;
+	mso-ligatures:none;}
+@page WordSection1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.0in 1.0in 1.0in;}
+div.WordSection1
+	{page:WordSection1;}
+--></style><!--[if gte mso 9]><xml>
+<o:shapedefaults v:ext=3D"edit" spidmax=3D"1026" />
+</xml><![endif]--><!--[if gte mso 9]><xml>
+<o:shapelayout v:ext=3D"edit">
+<o:idmap v:ext=3D"edit" data=3D"1" />
+</o:shapelayout></xml><![endif]-->
+</head>
+<body lang=3D"EN-US" link=3D"#467886" vlink=3D"#96607D" style=3D"word-wrap:=
+break-word">
+<div class=3D"WordSection1">
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#0B769F">Thanks &amp; Regards,</span></b><s=
+pan style=3D"font-size:12.0pt;font-family:&quot;Calibri&quot;,sans-serif;co=
+lor:#0B769F"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-IN" style=3D"color:#92D050;mso-l=
+igatures:none;mso-fareast-language:EN-IN">Chetan Sharma<o:p></o:p></span></=
+b></p>
+<p class=3D"MsoNormal"><i><span style=3D"font-size:10.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#404040">Automation | J&amp;J Migration Tea=
+m</span></i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;=
+,sans-serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:10.0pt;font-family:&q=
+uot;Calibri&quot;,sans-serif;color:#404040">Quantum Integrators, &nbsp;Indi=
+a<o:p></o:p></span></i></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">*
+</span></b><i><u><span style=3D"font-size:10.0pt"><a href=3D"mailto:csharm2=
+3@its.jnj.com"><span style=3D"color:#467886">csharm23@its.jnj.com</span></a=
+></span></u></i><span style=3D"font-size:12.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">)
+</span></b><i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quo=
+t;,sans-serif;color:#404040">+91 8534985983<o:p></o:p></span></i></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri&quot;,sa=
+ns-serif;mso-ligatures:none">From:</span></b><span style=3D"font-family:&qu=
+ot;Calibri&quot;,sans-serif;mso-ligatures:none"> Sharma, Chetan [GTSUS NON-=
+J&amp;J] &lt;CSharm23@ITS.JNJ.com&gt;
+<br>
+<b>Sent:</b> Monday, July 8, 2024 7:03 AM<br>
+<b>To:</b> Sharma, Chetan [GTSUS NON-J&amp;J] &lt;CSharm23@ITS.JNJ.com&gt;<=
+br>
+<b>Subject:</b> scm_jenkins<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#0B769F">Thanks &amp; Regards,</span></b><s=
+pan style=3D"font-size:12.0pt;font-family:&quot;Calibri&quot;,sans-serif;co=
+lor:#0B769F"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-IN" style=3D"color:#92D050;mso-l=
+igatures:none;mso-fareast-language:EN-IN">Chetan Sharma<o:p></o:p></span></=
+b></p>
+<p class=3D"MsoNormal"><i><span style=3D"font-size:10.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#404040">Automation | J&amp;J Migration Tea=
+m</span></i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;=
+,sans-serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:10.0pt;font-family:&q=
+uot;Calibri&quot;,sans-serif;color:#404040">Quantum Integrators, &nbsp;Indi=
+a<o:p></o:p></span></i></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">*
+</span></b><i><u><span style=3D"font-size:10.0pt"><a href=3D"mailto:csharm2=
+3@its.jnj.com">csharm23@its.jnj.com</a></span></u></i><span style=3D"font-s=
+ize:12.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">)
+</span></b><i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quo=
+t;,sans-serif;color:#404040">+91 8534985983<o:p></o:p></span></i></p>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<div>
+<div style=3D"border:none;border-top:solid #E1E1E1 1.0pt;padding:3.0pt 0in =
+0in 0in">
+<p class=3D"MsoNormal"><b><span style=3D"font-family:&quot;Calibri&quot;,sa=
+ns-serif;mso-ligatures:none">From:</span></b><span style=3D"font-family:&qu=
+ot;Calibri&quot;,sans-serif;mso-ligatures:none"> Sharma, Chetan [GTSUS NON-=
+J&amp;J]
+<br>
+<b>Sent:</b> Monday, July 8, 2024 6:59 AM<br>
+<b>To:</b> <a href=3D"mailto:chetan.sharma@quantumintegrators.com">chetan.s=
+harma@quantumintegrators.com</a><br>
+<b>Subject:</b> SAP Template<o:p></o:p></span></p>
+</div>
+</div>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+<p class=3D"MsoNormal"><b><span style=3D"font-size:12.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#0B769F">Thanks &amp; Regards,&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&=
+nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs=
+p;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></b><span style=3D"font-size:12.0pt;font-family:&quot;Calibri&quot;,=
+sans-serif;color:#0B769F"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-IN" style=3D"color:#92D050;mso-l=
+igatures:none;mso-fareast-language:EN-IN">Chetan Sharma<o:p></o:p></span></=
+b></p>
+<p class=3D"MsoNormal"><i><span style=3D"font-size:10.0pt;font-family:&quot=
+;Calibri&quot;,sans-serif;color:#404040">Automation | J&amp;J Migration Tea=
+m</span></i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quot;=
+,sans-serif"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><i><span style=3D"font-size:10.0pt;font-family:&q=
+uot;Calibri&quot;,sans-serif;color:#404040">Quantum Integrators, &nbsp;Indi=
+a<o:p></o:p></span></i></b></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">*
+</span></b><i><u><span style=3D"font-size:10.0pt"><a href=3D"mailto:csharm2=
+3@its.jnj.com">csharm23@its.jnj.com</a></span></u></i><span style=3D"font-s=
+ize:12.0pt"><o:p></o:p></span></p>
+<p class=3D"MsoNormal"><b><span lang=3D"EN-AU" style=3D"font-size:10.0pt;fo=
+nt-family:Wingdings;color:#E36C0A">)
+</span></b><i><span style=3D"font-size:10.0pt;font-family:&quot;Calibri&quo=
+t;,sans-serif;color:#404040">+91 8534985983<o:p></o:p></span></i></p>
+<p class=3D"MsoNormal"><o:p>&nbsp;</o:p></p>
+</div>
+</body>
+</html>
+
+--_000_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_--
+
+--_004_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_
+Content-Type: application/octet-stream; name="jenkins.yaml"
+Content-Description: jenkins.yaml
+Content-Disposition: attachment; filename="jenkins.yaml"; size=849;
+	creation-date="Mon, 08 Jul 2024 11:02:31 GMT";
+	modification-date="Mon, 08 Jul 2024 11:05:06 GMT"
+Content-Transfer-Encoding: base64
+
+LSB1cmw6IGh0dHBzOi8vamVua2lucy5lYXQuam5qLmNvbS90YWJ4LXJlbGVhc2UNCiAgY3JlYXRl
+Sm9ic0Zyb206DQogICAgLSBkZXZlbG9wbWVudA0KICAgIC0gcWENCiAgICAtIHByb2R1Y3Rpb24N
+CiAgam9iczoNCiAgICAtIGpvYlN0eWxlOiBtdWx0aS1icmFuY2gtcGlwZWxpbmUgICAgICAgICMg
+SmVua2lucyBKb2IgU3R5bGUuIFN1cHBvcnRlZCB2YWx1ZXM6IGRzbCwgbXVsdGktYnJhbmNoLXBp
+cGVsaW5lDQogICAgICBqb2JOYW1lOiB0ZXJyYWZvcm0tYnVpbGQgICAgICAgICAgICAgICAjIEZ1
+bGx5IHF1YWxpZmllZCBsb2NhdGlvbiB0byBjcmVhdGUgam9iSmVua2lucyBKb2IgTmFtZS4gU3Vw
+cG9ydGVkIHZhbHVlczogYWxwaGFudW1lcmljIHN0cmluZyB3aXRoIG5vIHNwYWNlcyBvciBzcGVj
+aWFsIGNoYXJhY3RlcnMgKGllLiBwaXBlbGluZS1qb2ItbmFtZSBvciBmb2xkZXIvcGlwZWxpbmUt
+am9iLW5hbWUgKQ0KICAgICAgam9iQ3JlZGVudGlhbHM6IHNvdXJjZWNvZGUtYml0YnVja2V0ICAg
+IyBDcmVkZW50aWFscyBKZW5raW5zIHdpbGwgdXNlIHRvIHB1bGwgdGhlIGNvbmZpZ3VyYXRpb24g
+b2YgSlBNIHBpcGVsaW5lLiBEZWZhdWx0OiBzb3VyY2Vjb2RlLWJpdGJ1Y2tldA0KICAgICAgaW5j
+bHVkZUJyYW5jaGVzOiAgICAgICAgICAgICAgICAgICAgICAgIyBMaXN0IG9mIGJyYW5jaGVzIGZv
+ciB3aGljaCB0aGUgSmVua2lucyB3aWxsIHRyaWdnZXIgam9icw0KICAgICAgICAtIGRldmVsb3Bt
+ZW50DQogICAgICAgIC0gcWENCiAgICAgICAgLSBwcm9kdWN0aW9uDQogIHRyaWdnZXJKb2JzRnJv
+bToNCiAgICAtIGRldmVsb3BtZW50DQogICAgLSBxYQ0KICAgIC0gcHJvZHVjdGlvbg0K
+
+--_004_BY5PR07MB72504628DC887A9B7CF501689CDA2BY5PR07MB7250namp_--
