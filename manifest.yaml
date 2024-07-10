@@ -16,15 +16,15 @@ common:
     enabled: true
     type: multi
     stages:
-      set-vpcx-account:
+      set-vpcx-account:'ITX-DMX'
         enabled: true
         type: iac
         jenkinsUrl: 'https://iac-jenkins.cloudx.jnj.com/'
         jobName: 'IaC'
         jenkinsCredentialsId: 'sourcecode-bitbucket'
         tfVersion: '1.0'
-        vpcxAccount: 'set-vpcx-account'
-        subDirectory: 'set-vpcx-account'
+        vpcxAccount: 'ITX-DMX'
+        subDirectory: 'ITX-DMX'
   versionCalculation:
     enabled: false
   resolveArtifacts:
