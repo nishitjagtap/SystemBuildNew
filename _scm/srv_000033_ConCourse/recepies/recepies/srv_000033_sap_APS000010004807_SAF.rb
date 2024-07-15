@@ -23,7 +23,7 @@ node.default['srv_000033_sap']['create_lvm_filesystems'] = true
 # Detailed description of attributes can be found here:
 # https://confluence.jnj.com/display/ADVR/Explaination+of+SAP+CHEF+application+cookbook+attributes+%3E%3D+0.2.1
 
-node.override['srv_000033_sap']['users']["#{s_lsid}adm"]['u_uid'] = 9101
+node.override['srv_000033_sap']['users']["#{s_lsid}adm"]['u_uid'] = 9100
 node.override['srv_000033_sap']['users']['sapadm']['u_uid'] = 9300
 
 node.default['srv_000033_sap']['sap_system_definition'] =
@@ -33,9 +33,9 @@ node.default['srv_000033_sap']['sap_system_definition'] =
     {
       'sapversion' => 'NW749',
       'stack' => 'WD',
-      'sap_cmdb_ci' => 'CONCOURSE-IS-WD-SBX-SAH',
-      'email_addr' => %w(csharm23@its.jnj.com),
-      'app_environment' => 'Development',
+      'sap_cmdb_ci' => 'CONCOURSE-IS-WD-SBX-SAF',
+      'email_addr' => %w(nishit.jagtap@quantumintegrators.com),
+      'app_environment' => 'Test',
     },
     # instance data here
     # possible instance types: cs, acs, jcs, ers, aers, jers, db, pas, aas, wd
@@ -49,16 +49,6 @@ node.default['srv_000033_sap']['sap_system_definition'] =
           'NW_GetMasterPassword.masterPwd' => 'Welcome123',
           'NW_Webdispatcher_Instance.wdInstanceNumber' => '00',
           'NW_webdispatcher_Instance.wdVirtualHostname' => "w#{s_lsid}01",
-        },
-      },
-      {
-        'instance_vhost' => "w#{s_lsid}02",
-        'instance_number' => '00',
-        'build_info' =>
-        {
-          'NW_GetMasterPassword.masterPwd' => 'Welcome123',
-          'NW_Webdispatcher_Instance.wdInstanceNumber' => '00',
-          'NW_webdispatcher_Instance.wdVirtualHostname' => "w#{s_lsid}02",
         },
       },
     ],

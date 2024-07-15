@@ -73,12 +73,12 @@ node.default['srv_000033_sap']['sap_system_definition'] =
       'sapversion' => 'NW753',
       'stack' => 'ABAP',
       'dbversion' => 'ORA19',
-      'sap_cmdb_ci' => 'CONCOURSE-IS-ATT-SBX-S24',
-      'email_addr' => %w(csharm23@its.jnj.com),
+      'sap_cmdb_ci' => 'CONCOURSE-IS-ATT-SBX-S23',
+      'email_addr' => %w(nishit.jagtap@quantumintegrators.com),
       # app_environment can be: 'Staging', 'Test', 'Sandbox', 'Development', 'QA', or 'Production'
-      'app_environment' => 'Development',
+      'app_environment' => 'Test',
       # backint_folder can be 'Sandbox', 'Development', 'Quality', or 'Production'
-      'backint_folder' => 'Development',
+      'backint_folder' => 'Sandbox',
     },
     # instance data here
     # possible instance types: cs, acs, jcs, ers, aers, jers, db, pas, aas, wd
@@ -99,13 +99,13 @@ node.default['srv_000033_sap']['sap_system_definition'] =
       'instance_number' => '00',
       'build_info' =>
       {
-        'storageBasedCopy.ora.ABAPSchema' => 'SAPSR3DB',
+        'storageBasedCopy.ora.ABAPSchema' => 'SAPSR3',
       },
       'additional_linux_kernel_params' =>
       {
         'vm.nr_hugepages' =>
         {
-          'sap_sysctl_value' => '19650',
+          'sap_sysctl_value' => '45713',
         },
       },
     },
@@ -120,22 +120,9 @@ node.default['srv_000033_sap']['sap_system_definition'] =
         'NW_CI_Instance.ciVirtualHostname' => "as#{s_lsid}00",
         'NW_getDBInfoGeneric.dbhost' => "db#{s_lsid}",
         'NW_CI_Instance.ascsInstanceNumber' => '00',
-        'storageBasedCopy.ora.ABAPSchema' => 'SAPSR3DB',
+        'storageBasedCopy.ora.ABAPSchema' => 'SAPSR3',
       },
     },
-    'aas' =>
-    [
-      {
-        'instance_vhost' => "as#{s_lsid}01",
-        'instance_number' => '00',
-        'build_info' =>
-        {
-          'NW_AS.instanceNumber' => '00',
-          'NW_DI_Instance.virtualHostname' => "as#{s_lsid}01",
-          'storageBasedCopy.ora.ABAPSchema' => 'SAPSR3DB',
-        },
-      },
-    ],
   }
 
 # # These should only be set for development purposes or for pre-blueprint built VMs
